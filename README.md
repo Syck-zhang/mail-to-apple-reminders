@@ -28,8 +28,28 @@ templates/state.example.json       # Safe cursor/de-duplication state template
 
 - macOS 14+ and Apple Reminders
 - [`remindctl`](https://github.com/openclaw/remindctl) with Reminders permission
-- A mail reader CLI or connector. The examples use [Agent Mail](https://agent.qq.com) and `agently-cli`.
+- An agent mailbox and a mail reader CLI or connector. The examples use [Agent Mail](https://agent.qq.com) and `agently-cli`.
 - A scheduler in your agent host (for example, Codex automations)
+
+## Create and authorize an Agent Mail inbox
+
+This workflow needs a mailbox that the agent may read. We recommend a dedicated [Agent Mail](https://agent.qq.com) inbox rather than granting an agent access to a personal inbox. You can replace it with another user-authorized mail connector if it supports listing and reading messages.
+
+1. Visit [agent.qq.com](https://agent.qq.com) and register or sign in to Agent Mail.
+2. Install the Agent Mail CLI:
+
+   ```bash
+   npm install -g @tencent-qqmail/agently-cli
+   ```
+
+3. Run `agently-cli auth login`, open the authorization link it displays, and finish the OAuth approval in your browser.
+4. Confirm the connected agent mailbox with:
+
+   ```bash
+   agently-cli +me
+   ```
+
+Record the returned mailbox address in your recurring-job configuration. The workflow only needs read access plus permission to create Apple Reminders; do not authorize sending, replying, forwarding, deleting, downloading attachments, or opening email links unless you intentionally add those capabilities.
 
 ## Install
 

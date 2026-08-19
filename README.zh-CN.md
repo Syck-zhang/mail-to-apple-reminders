@@ -28,8 +28,28 @@ templates/state.example.json       # 邮件游标与去重状态模板
 
 - macOS 14+ 与 Apple 提醒事项 App
 - 已授予提醒事项权限的 [`remindctl`](https://github.com/openclaw/remindctl)
-- 可读取邮件的 CLI 或连接器；示例使用 [Agent Mail](https://agent.qq.com) 与 `agently-cli`
+- 已注册的 Agent 邮箱，以及可读取邮件的 CLI 或连接器；示例使用 [Agent Mail](https://agent.qq.com) 与 `agently-cli`
 - 支持定时任务的 Agent 主机，例如 Codex automations
+
+## 注册并授权 Agent Mail 邮箱
+
+这个工作流需要一个允许 Agent 读取的邮箱。推荐使用专用的 [Agent Mail](https://agent.qq.com) 邮箱，而不是将个人邮箱直接授予 Agent。也可以替换为其他已获用户授权、且支持列出和读取邮件的连接器。
+
+1. 访问 [agent.qq.com](https://agent.qq.com)，注册或登录 Agent Mail。
+2. 安装 Agent Mail CLI：
+
+   ```bash
+   npm install -g @tencent-qqmail/agently-cli
+   ```
+
+3. 运行 `agently-cli auth login`，在浏览器中打开其显示的授权链接并完成 OAuth 授权。
+4. 使用以下命令确认已连接的 Agent 邮箱：
+
+   ```bash
+   agently-cli +me
+   ```
+
+将命令返回的邮箱地址填入定时任务配置。这个工作流只需读取邮件和创建 Apple 提醒事项的权限；除非你有意扩展能力，不要授权发送、回复、转发、删除、下载附件或打开邮件链接。
 
 ## 安装
 

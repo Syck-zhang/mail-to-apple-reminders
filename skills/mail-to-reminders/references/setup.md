@@ -4,9 +4,20 @@
 
 - macOS 14 or later with the Reminders app.
 - [`remindctl`](https://github.com/openclaw/remindctl), with Reminders access granted to the terminal or host app that runs it.
-- A mail CLI with structured list/read support. This repository uses [`agently-cli`](https://agent.qq.com) examples.
+- A registered Agent Mail inbox and a mail CLI with structured list/read support. This repository uses [`agently-cli`](https://agent.qq.com) examples.
 
-Install `remindctl` using the tool's documented Homebrew command. Install and authorize the mail CLI using its documented OAuth flow. Do not commit OAuth tokens, macOS keychain exports, mailbox addresses, or reminder data.
+## Agent Mail onboarding
+
+Register or sign in at [agent.qq.com](https://agent.qq.com), then install and authorize the CLI:
+
+```bash
+npm install -g @tencent-qqmail/agently-cli
+agently-cli auth login
+```
+
+Complete the OAuth approval in a browser. Confirm the connected mailbox with `agently-cli +me`, then use that mailbox address in the scheduler configuration.
+
+Install `remindctl` using the tool's documented Homebrew command. Do not commit OAuth tokens, macOS keychain exports, mailbox addresses, or reminder data.
 
 Check access before a first live run:
 
