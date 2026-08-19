@@ -11,15 +11,13 @@ SKILL_NAME="mail-to-reminders"
 
 usage() {
   cat <<'EOF'
-Usage: ./scripts/install-skill.sh <codex|claude|dsh>
-       ./scripts/install-skill.sh --dest <skills-directory>
+Usage: ./scripts/install-skill.sh <codex|claude>
 
 Installs the mail-to-reminders skill without overwriting an existing skill.
 
 Targets:
   codex   ~/.codex/skills
   claude  ~/.claude/skills
-  dsh     ~/.agents/skills (DeepSeek Harness-compatible global root)
 EOF
 }
 
@@ -32,7 +30,6 @@ if [[ $# -eq 1 ]]; then
   case "$1" in
     codex) DEST_ROOT="${HOME}/.codex/skills" ;;
     claude) DEST_ROOT="${HOME}/.claude/skills" ;;
-    dsh) DEST_ROOT="${HOME}/.agents/skills" ;;
     -h|--help) usage; exit 0 ;;
     *) usage >&2; exit 2 ;;
   esac

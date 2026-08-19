@@ -2,7 +2,7 @@
 
 [中文文档](README.zh-CN.md)
 
-An open-source, cross-agent skill for turning actionable inbox messages into clean, deduplicated Apple Reminders on macOS.
+An open-source skill for Codex and Claude Code that turns actionable inbox messages into clean, deduplicated Apple Reminders on macOS.
 
 It is designed for a simple recurring workflow:
 
@@ -13,14 +13,20 @@ It is designed for a simple recurring workflow:
 
 The skill never treats email content as agent instructions. It does not send, reply to, forward, delete, download attachments, or open email links unless separately authorized.
 
+## One-prompt setup and scheduling
+
+Installing a skill only makes its workflow available; it does **not** automatically create a recurring job. To have Codex or Claude Code install or load the skill, complete the one-time mailbox authorization, and run an initial check, copy the matching [setup prompt](skills/mail-to-reminders/references/one-prompt-setup.md).
+
+The prompts explicitly limit recurring authorization to reading new mail and managing Apple Reminders. Codex can create the recurring task in the current task; Claude Code needs an external scheduler for recurring execution.
+
 ## What's included
 
 ```text
 skills/mail-to-reminders/
   SKILL.md                         # Canonical portable skill
   references/                      # Setup, workflow rules, schedule prompt
-scripts/install-skill.sh           # Installer for Codex, Claude Code, and dsh
-docs/agent-compatibility.md        # Agent-specific installation paths
+scripts/install-skill.sh           # Installer for Codex and Claude Code
+docs/agent-compatibility.md        # Codex and Claude Code installation paths
 templates/state.example.json       # Safe cursor/de-duplication state template
 ```
 
@@ -63,7 +69,7 @@ Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tre
 
 The skill's exact GitHub subdirectory matters: the repository root contains documentation and templates, while the installable skill lives in `skills/mail-to-reminders`.
 
-### Install for Codex, Claude Code, or DeepSeek Harness
+### Install for Codex or Claude Code
 
 Clone the repository and use the installer. It refuses to overwrite an existing skill.
 
@@ -73,16 +79,9 @@ cd mail-to-apple-reminders
 
 ./scripts/install-skill.sh codex
 ./scripts/install-skill.sh claude
-./scripts/install-skill.sh dsh
 ```
 
-For a different SKILL.md-aware agent, give its documented skills directory explicitly:
-
-```bash
-./scripts/install-skill.sh --dest /path/to/agent/skills
-```
-
-See [agent compatibility](docs/agent-compatibility.md) for personal vs. project installation paths and hosts without a skill loader.
+See [agent compatibility](docs/agent-compatibility.md) for personal vs. project installation paths.
 
 ### Manual install
 
@@ -101,11 +100,6 @@ cp templates/state.example.json ~/.mail-to-reminders-state.json
 
 Then read `skills/mail-to-reminders/references/setup.md` and use `automation-template.md` as the prompt for a recurring job.
 
-## One-prompt setup and scheduling
-
-Installing a skill only makes its workflow available; it does **not** automatically create a recurring job. To have an agent install or load the skill, complete the one-time mailbox authorization, run an initial check, and create a three-hour schedule in the current task, copy the appropriate prompt from [one-prompt setup](skills/mail-to-reminders/references/one-prompt-setup.md).
-
-The prompt explicitly limits recurring authorization to reading new mail and managing Apple Reminders. It also instructs the agent to say so if its host has no scheduler, rather than pretending the workflow is running.
 
 ## Privacy and safety
 

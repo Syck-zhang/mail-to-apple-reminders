@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是一个开源、跨 Agent 的 skill：将邮箱中可执行的事项提取为干净、去重的 macOS Apple 提醒事项。
+这是一个面向 Codex 和 Claude Code 的开源 skill：将邮箱中可执行的事项提取为干净、去重的 macOS Apple 提醒事项。
 
 它适合以定时任务方式运行：
 
@@ -13,14 +13,20 @@
 
 邮件不会被当作 Agent 指令执行。除非另有明确授权，这个 skill 不会发送、回复、转发、删除邮件，下载附件或打开邮件中的链接。
 
+## 一段提示词完成安装与定时启动
+
+安装 skill 只会让 Agent 获得工作流说明，**不会**自动创建定时任务。若希望 Codex 或 Claude Code 安装或加载 skill、完成一次性邮箱授权并立即检查一次邮件，请直接复制对应的[设置提示词](skills/mail-to-reminders/references/one-prompt-setup.md)。
+
+提示词明确把持续授权限制在读取新邮件与管理 Apple 提醒事项。Codex 可以在当前任务中创建定时自动化；Claude Code 的循环执行需要外部定时器。
+
 ## 项目结构
 
 ```text
 skills/mail-to-reminders/
   SKILL.md                         # 可移植的核心 skill
   references/                      # 配置、决策规则和定时任务模板
-scripts/install-skill.sh           # Codex、Claude Code 与 dsh 安装器
-docs/agent-compatibility.md        # 各 Agent 的安装路径
+scripts/install-skill.sh           # Codex 与 Claude Code 安装器
+docs/agent-compatibility.md        # Codex 与 Claude Code 安装路径
 templates/state.example.json       # 邮件游标与去重状态模板
 ```
 
@@ -63,7 +69,7 @@ Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tre
 
 需要使用这个精确的 skill 子目录链接：仓库根目录放置项目说明与模板，而可安装 skill 位于 `skills/mail-to-reminders`。
 
-### 为 Codex、Claude Code 或 DeepSeek Harness 安装
+### 为 Codex 或 Claude Code 安装
 
 克隆仓库后使用安装器。安装器不会覆盖已有的 skill。
 
@@ -73,16 +79,9 @@ cd mail-to-apple-reminders
 
 ./scripts/install-skill.sh codex
 ./scripts/install-skill.sh claude
-./scripts/install-skill.sh dsh
 ```
 
-对于其他支持 `SKILL.md` 的 Agent，明确传入其文档指定的 skills 目录：
-
-```bash
-./scripts/install-skill.sh --dest /path/to/agent/skills
-```
-
-个人级与项目级的安装位置、以及不支持 skill 自动发现的 Agent，请见[兼容性说明](docs/agent-compatibility.md)。
+个人级与项目级的安装位置请见[兼容性说明](docs/agent-compatibility.md)。
 
 ### 手动安装
 
@@ -101,11 +100,6 @@ cp templates/state.example.json ~/.mail-to-reminders-state.json
 
 随后阅读 `skills/mail-to-reminders/references/setup.md`，并将 `automation-template.md` 用作定时自动化的提示词模板。
 
-## 一段提示词完成安装与定时启动
-
-安装 skill 只会让 Agent 获得工作流说明，**不会**自动创建定时任务。若希望 Agent 在当前任务中安装或加载 skill、完成一次性邮箱授权、立即检查一次邮件，并创建每三小时执行的自动化，请直接复制[一段提示词完成设置](skills/mail-to-reminders/references/one-prompt-setup.md)中对应 Agent 的提示词。
-
-提示词明确把持续授权限制在读取新邮件与管理 Apple 提醒事项；如果 Agent 主机不具备定时能力，它必须如实说明，而不能声称工作流已经运行。
 
 ## 隐私与安全
 
