@@ -34,7 +34,7 @@ templates/state.example.json       # Safe cursor/de-duplication state template
 Clone this repository, then add the `skills/mail-to-reminders` directory to your Codex skills directory or install it through your usual skills workflow.
 
 ```bash
-git clone https://github.com/YOUR-ACCOUNT/mail-to-apple-reminders.git
+git clone https://github.com/Syck-zhang/mail-to-apple-reminders.git
 cp -R mail-to-apple-reminders/skills/mail-to-reminders ~/.codex/skills/
 ```
 
