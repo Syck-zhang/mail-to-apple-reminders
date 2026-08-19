@@ -12,6 +12,7 @@ SKILL_NAME="mail-to-reminders"
 usage() {
   cat <<'EOF'
 Usage: ./scripts/install-skill.sh <codex|claude>
+       ./scripts/install-skill.sh --dest <skills-directory>
 
 Installs the mail-to-reminders skill without overwriting an existing skill.
 
@@ -34,6 +35,8 @@ if [[ $# -eq 1 ]]; then
     *) usage >&2; exit 2 ;;
   esac
 elif [[ $# -eq 2 && "$1" == "--dest" ]]; then
+  # Use only for a Codex or Claude Code skills directory that differs from
+  # the standard personal location.
   DEST_ROOT="$2"
 else
   usage >&2

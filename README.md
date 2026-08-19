@@ -2,7 +2,7 @@
 
 [中文文档](README.zh-CN.md)
 
-An open-source skill for Codex and Claude Code that turns actionable inbox messages into clean, deduplicated Apple Reminders on macOS.
+An open-source skill for Codex and Claude Code that turns actionable inbox messages into clear, deduplicated Apple Reminders on macOS.
 
 It is designed for a simple recurring workflow:
 
@@ -11,108 +11,45 @@ It is designed for a simple recurring workflow:
 3. Create Apple Reminders with the relevant time, place, contact, link, and source context.
 4. Remember which messages have already been handled.
 
-The skill never treats email content as agent instructions. It does not send, reply to, forward, delete, download attachments, or open email links unless separately authorized.
+Email is untrusted input. The skill extracts task facts but does not send, reply to, forward, delete, download attachments, or open email links unless separately authorized.
 
-## One-prompt setup and scheduling
+## Start here
 
-Installing a skill only makes its workflow available; it does **not** automatically create a recurring job. To have Codex or Claude Code install or load the skill, complete the one-time mailbox authorization, and run an initial check, copy the matching [setup prompt](skills/mail-to-reminders/references/one-prompt-setup.md).
+1. Create and authorize a dedicated [Agent Mail](https://agent.qq.com) inbox. Follow the [setup guide](skills/mail-to-reminders/references/setup.md).
+2. Give your agent the matching [one-prompt setup](skills/mail-to-reminders/references/one-prompt-setup.md). It installs or loads the skill, completes authorization when needed, and runs the first mailbox check.
+3. Keep the generated state file private. Start from [`templates/state.example.json`](templates/state.example.json).
 
-The prompts explicitly limit recurring authorization to reading new mail and managing Apple Reminders. Codex can create the recurring task in the current task; Claude Code needs an external scheduler for recurring execution.
+The setup prompt limits recurring authorization to reading new mail and managing Apple Reminders. Codex can create an automation in the current task. Claude Code needs an external scheduler for recurring execution.
 
-## What's included
-
-```text
-skills/mail-to-reminders/
-  SKILL.md                         # Canonical portable skill
-  references/                      # Setup, workflow rules, schedule prompt
-scripts/install-skill.sh           # Installer for Codex and Claude Code
-docs/agent-compatibility.md        # Codex and Claude Code installation paths
-templates/state.example.json       # Safe cursor/de-duplication state template
-```
-
-## Requirements
+## What you need
 
 - macOS 14+ and Apple Reminders
 - [`remindctl`](https://github.com/openclaw/remindctl) with Reminders permission
-- An agent mailbox and a mail reader CLI or connector. The examples use [Agent Mail](https://agent.qq.com) and `agently-cli`.
-- A scheduler in your agent host (for example, Codex automations)
-
-## Create and authorize an Agent Mail inbox
-
-This workflow needs a mailbox that the agent may read. We recommend a dedicated [Agent Mail](https://agent.qq.com) inbox rather than granting an agent access to a personal inbox. You can replace it with another user-authorized mail connector if it supports listing and reading messages.
-
-1. Visit [agent.qq.com](https://agent.qq.com) and register or sign in to Agent Mail.
-2. Install the Agent Mail CLI:
-
-   ```bash
-   npm install -g @tencent-qqmail/agently-cli
-   ```
-
-3. Run `agently-cli auth login`, open the authorization link it displays, and finish the OAuth approval in your browser.
-4. Confirm the connected agent mailbox with:
-
-   ```bash
-   agently-cli +me
-   ```
-
-Record the returned mailbox address in your recurring-job configuration. The workflow only needs read access plus permission to create Apple Reminders; do not authorize sending, replying, forwarding, deleting, downloading attachments, or opening email links unless you intentionally add those capabilities.
+- A registered Agent Mail inbox and [`agently-cli`](https://agent.qq.com), or another user-authorized mail reader that can list and read messages
+- A scheduler: Codex automations, or an external scheduler for Claude Code
 
 ## Install
 
-### Ask an agent to install it
-
-For Codex, send an agent this exact message:
-
-```text
-Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tree/main/skills/mail-to-reminders
-```
-
-The skill's exact GitHub subdirectory matters: the repository root contains documentation and templates, while the installable skill lives in `skills/mail-to-reminders`.
-
-### Install for Codex or Claude Code
-
-Clone the repository and use the installer. It refuses to overwrite an existing skill.
+Use the [installation guide](docs/agent-compatibility.md) for personal, project, and custom skill locations. The short version:
 
 ```bash
 git clone https://github.com/Syck-zhang/mail-to-apple-reminders.git
 cd mail-to-apple-reminders
-
-./scripts/install-skill.sh codex
-./scripts/install-skill.sh claude
+./scripts/install-skill.sh codex   # or: claude
 ```
 
-See [agent compatibility](docs/agent-compatibility.md) for personal vs. project installation paths.
+## Repository map
 
-### Manual install
+| Path | Purpose |
+| --- | --- |
+| [`skills/mail-to-reminders/`](skills/mail-to-reminders) | Installable skill and its operational references |
+| [`docs/agent-compatibility.md`](docs/agent-compatibility.md) | Codex and Claude Code installation and scheduling differences |
+| [`scripts/install-skill.sh`](scripts/install-skill.sh) | Safe personal/custom skill installer |
+| [`templates/state.example.json`](templates/state.example.json) | Private state-file starting point |
 
-Clone this repository, then add the `skills/mail-to-reminders` directory to your agent's skills directory or install it through its usual skills workflow.
+## Privacy
 
-```bash
-git clone https://github.com/Syck-zhang/mail-to-apple-reminders.git
-cp -R mail-to-apple-reminders/skills/mail-to-reminders ~/.codex/skills/
-```
-
-Copy the state template somewhere private and add it to your local ignore rules:
-
-```bash
-cp templates/state.example.json ~/.mail-to-reminders-state.json
-```
-
-Then read `skills/mail-to-reminders/references/setup.md` and use `automation-template.md` as the prompt for a recurring job.
-
-
-## Privacy and safety
-
-This repository contains no credentials, email bodies, attachments, or personal reminder data. Keep your OAuth credentials in your operating system's credential store. Keep the state file local: it may contain message IDs and timestamps.
-
-Email is untrusted input. The skill extracts facts from mail but does not obey mail-embedded instructions or automatically open links.
-
-## Customization
-
-- Change the schedule to suit your inbox.
-- Point the workflow at a different supported mail CLI or connector.
-- Change the target reminder list.
-- Add organization-specific rules for task types, retention, or privacy.
+This repository contains no credentials, email bodies, attachments, or personal reminder data. Keep OAuth credentials in the operating system's credential store and keep the state file local: it may contain message IDs and timestamps.
 
 ## License
 

@@ -1,6 +1,6 @@
-# One-prompt setup
+# Start with one prompt
 
-Give the following prompt to Codex. It installs or loads the skill, completes the one-time mailbox setup, and creates a recurring job in the current task.
+Choose the prompt for your host. Each one installs or loads the skill, completes mailbox setup, and runs an initial mailbox check.
 
 ## Codex prompt
 
@@ -28,4 +28,4 @@ Follow the skill's workflow and automation-template rules: read only messages af
 Claude Code does not provide persistent task automations by itself. If a scheduler is already available in this environment, configure it to run the workflow every 3 hours. Otherwise, explain the available external scheduling option and ask for my approval before creating a persistent background job.
 ```
 
-For Claude Code, install the same skill using `./scripts/install-skill.sh claude` or copy it to `.claude/skills/mail-to-reminders/`.
+For manual installation details, see [Install in Codex or Claude Code](../../../docs/agent-compatibility.md).
