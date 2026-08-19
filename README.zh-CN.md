@@ -101,6 +101,12 @@ cp templates/state.example.json ~/.mail-to-reminders-state.json
 
 随后阅读 `skills/mail-to-reminders/references/setup.md`，并将 `automation-template.md` 用作定时自动化的提示词模板。
 
+## 一段提示词完成安装与定时启动
+
+安装 skill 只会让 Agent 获得工作流说明，**不会**自动创建定时任务。若希望 Agent 在当前任务中安装或加载 skill、完成一次性邮箱授权、立即检查一次邮件，并创建每三小时执行的自动化，请直接复制[一段提示词完成设置](skills/mail-to-reminders/references/one-prompt-setup.md)中对应 Agent 的提示词。
+
+提示词明确把持续授权限制在读取新邮件与管理 Apple 提醒事项；如果 Agent 主机不具备定时能力，它必须如实说明，而不能声称工作流已经运行。
+
 ## 隐私与安全
 
 本仓库不包含凭据、邮件正文、附件或个人提醒事项数据。OAuth 凭据应只保存在操作系统的凭据存储中；状态文件应保留在本机，因为其中可能含有邮件 ID 和时间戳。

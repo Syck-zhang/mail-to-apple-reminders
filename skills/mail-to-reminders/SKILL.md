@@ -26,4 +26,4 @@ Do not use it to send, reply to, forward, trash, unsubscribe, download attachmen
 
 Write a short action-first title. In the note, retain only the details needed to complete the task: deadline or activity window, location, contact, necessary materials, relevant amount or reference number, explicit registration URL, and a concise source record (subject, original sender, received timestamp, message ID).
 
-For repeatable setup, read [setup and permissions](references/setup.md). For decision rules and state handling, read [workflow details](references/workflow.md). For a ready-to-paste scheduled-job prompt, read [automation template](references/automation-template.md).
+For repeatable setup, read [setup and permissions](references/setup.md). For decision rules and state handling, read [workflow details](references/workflow.md). For a ready-to-paste scheduled-job prompt, read [automation template](references/automation-template.md). To bootstrap installation, authorization, and scheduling from one user message, read [one-prompt setup](references/one-prompt-setup.md).

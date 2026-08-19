@@ -101,6 +101,12 @@ cp templates/state.example.json ~/.mail-to-reminders-state.json
 
 Then read `skills/mail-to-reminders/references/setup.md` and use `automation-template.md` as the prompt for a recurring job.
 
+## One-prompt setup and scheduling
+
+Installing a skill only makes its workflow available; it does **not** automatically create a recurring job. To have an agent install or load the skill, complete the one-time mailbox authorization, run an initial check, and create a three-hour schedule in the current task, copy the appropriate prompt from [one-prompt setup](skills/mail-to-reminders/references/one-prompt-setup.md).
+
+The prompt explicitly limits recurring authorization to reading new mail and managing Apple Reminders. It also instructs the agent to say so if its host has no scheduler, rather than pretending the workflow is running.
+
 ## Privacy and safety
 
 This repository contains no credentials, email bodies, attachments, or personal reminder data. Keep your OAuth credentials in your operating system's credential store. Keep the state file local: it may contain message IDs and timestamps.
