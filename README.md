@@ -1,5 +1,7 @@
 # Mail to Apple Reminders
 
+[中文文档](README.zh-CN.md)
+
 An open-source Codex skill for turning actionable inbox messages into clean, deduplicated Apple Reminders on macOS.
 
 It is designed for a simple recurring workflow:
