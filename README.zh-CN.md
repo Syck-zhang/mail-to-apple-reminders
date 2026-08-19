@@ -15,8 +15,9 @@
 
 ## 从这里开始
 
-1. 将对应的[一段提示词完成设置](skills/mail-to-reminders/references/one-prompt-setup.md)发给 Agent。它会安装或加载 skill、在需要时引导完成 Agent Mail 的一次性授权，并执行首次邮件检查。
-2. 将状态文件保留在私有位置，从 [`templates/state.example.json`](templates/state.example.json) 开始。
+1. 注册或登录专用的 [Agent Mail](https://agent.qq.com) 邮箱。
+2. 将对应的[一段提示词完成设置](skills/mail-to-reminders/references/one-prompt-setup.md)发给 Agent。它会安装或加载 skill、在需要时引导完成一次性授权，并执行首次邮件检查。
+3. 将状态文件保留在私有位置，从 [`templates/state.example.json`](templates/state.example.json) 开始。
 
 设置提示词明确把持续授权限制在读取新邮件与管理 Apple 提醒事项。Codex 可以在当前任务中创建自动化；Claude Code 的循环执行需要外部定时器。
 

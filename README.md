@@ -15,8 +15,9 @@ Email is untrusted input. The skill extracts task facts but does not send, reply
 
 ## Start here
 
-1. Give your agent the matching [one-prompt setup](skills/mail-to-reminders/references/one-prompt-setup.md). It installs or loads the skill, guides the one-time Agent Mail authorization when needed, and runs the first mailbox check.
-2. Keep the generated state file private. Start from [`templates/state.example.json`](templates/state.example.json).
+1. Register or sign in to a dedicated [Agent Mail](https://agent.qq.com) inbox.
+2. Give your agent the matching [one-prompt setup](skills/mail-to-reminders/references/one-prompt-setup.md). It installs or loads the skill, guides the one-time authorization when needed, and runs the first mailbox check.
+3. Keep the generated state file private. Start from [`templates/state.example.json`](templates/state.example.json).
 
 The setup prompt limits recurring authorization to reading new mail and managing Apple Reminders. Codex can create an automation in the current task. Claude Code needs an external scheduler for recurring execution.
 
