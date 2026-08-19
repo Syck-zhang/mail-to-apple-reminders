@@ -31,6 +31,18 @@ templates/state.example.json       # 邮件游标与去重状态模板
 
 ## 安装
 
+### 直接发给 Agent 安装
+
+将下面这句话原样发给 Agent：
+
+```text
+Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tree/main/skills/mail-to-reminders
+```
+
+需要使用这个精确的 skill 子目录链接：仓库根目录放置项目说明与模板，而可安装 skill 位于 `skills/mail-to-reminders`。
+
+### 手动安装
+
 克隆本仓库后，将 `skills/mail-to-reminders` 安装到 Codex skills 目录，或通过你现有的 skills 工作流安装。
 
 ```bash

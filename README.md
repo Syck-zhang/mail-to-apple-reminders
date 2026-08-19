@@ -31,6 +31,18 @@ templates/state.example.json       # Safe cursor/de-duplication state template
 
 ## Install
 
+### Ask an agent to install it
+
+Send an agent this exact message:
+
+```text
+Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tree/main/skills/mail-to-reminders
+```
+
+The skill's exact GitHub subdirectory matters: the repository root contains documentation and templates, while the installable skill lives in `skills/mail-to-reminders`.
+
+### Manual install
+
 Clone this repository, then add the `skills/mail-to-reminders` directory to your Codex skills directory or install it through your usual skills workflow.
 
 ```bash
