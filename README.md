@@ -2,7 +2,7 @@
 
 [中文文档](README.zh-CN.md)
 
-An open-source Codex skill for turning actionable inbox messages into clean, deduplicated Apple Reminders on macOS.
+An open-source, cross-agent skill for turning actionable inbox messages into clean, deduplicated Apple Reminders on macOS.
 
 It is designed for a simple recurring workflow:
 
@@ -17,8 +17,10 @@ The skill never treats email content as agent instructions. It does not send, re
 
 ```text
 skills/mail-to-reminders/
-  SKILL.md                         # Installable Codex skill
+  SKILL.md                         # Canonical portable skill
   references/                      # Setup, workflow rules, schedule prompt
+scripts/install-skill.sh           # Installer for Codex, Claude Code, and dsh
+docs/agent-compatibility.md        # Agent-specific installation paths
 templates/state.example.json       # Safe cursor/de-duplication state template
 ```
 
@@ -33,7 +35,7 @@ templates/state.example.json       # Safe cursor/de-duplication state template
 
 ### Ask an agent to install it
 
-Send an agent this exact message:
+For Codex, send an agent this exact message:
 
 ```text
 Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tree/main/skills/mail-to-reminders
@@ -41,9 +43,30 @@ Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tre
 
 The skill's exact GitHub subdirectory matters: the repository root contains documentation and templates, while the installable skill lives in `skills/mail-to-reminders`.
 
+### Install for Codex, Claude Code, or DeepSeek Harness
+
+Clone the repository and use the installer. It refuses to overwrite an existing skill.
+
+```bash
+git clone https://github.com/Syck-zhang/mail-to-apple-reminders.git
+cd mail-to-apple-reminders
+
+./scripts/install-skill.sh codex
+./scripts/install-skill.sh claude
+./scripts/install-skill.sh dsh
+```
+
+For a different SKILL.md-aware agent, give its documented skills directory explicitly:
+
+```bash
+./scripts/install-skill.sh --dest /path/to/agent/skills
+```
+
+See [agent compatibility](docs/agent-compatibility.md) for personal vs. project installation paths and hosts without a skill loader.
+
 ### Manual install
 
-Clone this repository, then add the `skills/mail-to-reminders` directory to your Codex skills directory or install it through your usual skills workflow.
+Clone this repository, then add the `skills/mail-to-reminders` directory to your agent's skills directory or install it through its usual skills workflow.
 
 ```bash
 git clone https://github.com/Syck-zhang/mail-to-apple-reminders.git

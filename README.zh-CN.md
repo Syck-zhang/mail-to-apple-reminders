@@ -2,7 +2,7 @@
 
 [English](README.md)
 
-这是一个开源 Codex skill：将邮箱中可执行的事项提取为干净、去重的 macOS Apple 提醒事项。
+这是一个开源、跨 Agent 的 skill：将邮箱中可执行的事项提取为干净、去重的 macOS Apple 提醒事项。
 
 它适合以定时任务方式运行：
 
@@ -17,8 +17,10 @@
 
 ```text
 skills/mail-to-reminders/
-  SKILL.md                         # 可安装的 Codex skill
+  SKILL.md                         # 可移植的核心 skill
   references/                      # 配置、决策规则和定时任务模板
+scripts/install-skill.sh           # Codex、Claude Code 与 dsh 安装器
+docs/agent-compatibility.md        # 各 Agent 的安装路径
 templates/state.example.json       # 邮件游标与去重状态模板
 ```
 
@@ -33,7 +35,7 @@ templates/state.example.json       # 邮件游标与去重状态模板
 
 ### 直接发给 Agent 安装
 
-将下面这句话原样发给 Agent：
+在 Codex 中，可将下面这句话原样发给 Agent：
 
 ```text
 Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tree/main/skills/mail-to-reminders
@@ -41,9 +43,30 @@ Install the skill from https://github.com/Syck-zhang/mail-to-apple-reminders/tre
 
 需要使用这个精确的 skill 子目录链接：仓库根目录放置项目说明与模板，而可安装 skill 位于 `skills/mail-to-reminders`。
 
+### 为 Codex、Claude Code 或 DeepSeek Harness 安装
+
+克隆仓库后使用安装器。安装器不会覆盖已有的 skill。
+
+```bash
+git clone https://github.com/Syck-zhang/mail-to-apple-reminders.git
+cd mail-to-apple-reminders
+
+./scripts/install-skill.sh codex
+./scripts/install-skill.sh claude
+./scripts/install-skill.sh dsh
+```
+
+对于其他支持 `SKILL.md` 的 Agent，明确传入其文档指定的 skills 目录：
+
+```bash
+./scripts/install-skill.sh --dest /path/to/agent/skills
+```
+
+个人级与项目级的安装位置、以及不支持 skill 自动发现的 Agent，请见[兼容性说明](docs/agent-compatibility.md)。
+
 ### 手动安装
 
-克隆本仓库后，将 `skills/mail-to-reminders` 安装到 Codex skills 目录，或通过你现有的 skills 工作流安装。
+克隆本仓库后，将 `skills/mail-to-reminders` 安装到对应 Agent 的 skills 目录，或通过该 Agent 的现有 skills 工作流安装。
 
 ```bash
 git clone https://github.com/Syck-zhang/mail-to-apple-reminders.git
