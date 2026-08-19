@@ -1,0 +1,8 @@
+# Local workflow state: may contain mail identifiers and timestamps.
+.mail_reminder_state.json
+
+# Local review artifacts unrelated to this skill.
+.pptx-review/
+
+# macOS metadata
+.DS_Store

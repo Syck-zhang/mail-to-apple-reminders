@@ -1,0 +1,4 @@
+interface:
+  display_name: "Mail to Reminders"
+  short_description: "Turn inbox action items into Apple Reminders"
+  default_prompt: "Review new inbox messages and create deduplicated Apple Reminders for actionable items."
