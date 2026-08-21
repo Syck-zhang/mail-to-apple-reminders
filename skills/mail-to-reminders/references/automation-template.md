@@ -12,4 +12,4 @@ Extract only concrete tasks that the mailbox owner must perform. Before creating
 Use an all-day reminder when only a date is stated. Do not invent times, deadlines, location triggers, or a registration status. Update [state-file] only after a message has been successfully handled; mark non-actionable messages as processed. Report only material changes; remain quiet when no new mail is found.
 ```
 
-The automation host should handle scheduling; a three-hour interval is a practical default for personal inboxes.
+The automation host should handle scheduling; a 12-hour interval is a practical default for this workflow.

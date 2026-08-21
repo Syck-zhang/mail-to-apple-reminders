@@ -34,4 +34,4 @@ Copy `templates/state.example.json` outside the repository or add the chosen sta
 
 Use the scheduling facility in the host agent (for example, a Codex heartbeat). Do not keep a long-running terminal watcher alive unless the host environment is designed for it. A periodic run is more resilient to restarts.
 
-Choose a cadence appropriate to the mailbox: every 2–4 hours works well for ordinary personal email. The schedule must be explicit and user-approved.
+Choose a cadence appropriate to the mailbox: every 12 hours is the default for this workflow. The schedule must be explicit and user-approved.
